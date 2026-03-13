@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Image Carousel</title>
+  </head>
+
+  <body
+    class="bg-black text-white gap-4 flex flex-col items-center justify-center h-screen"
+  >
+    <div class="relative w-175 overflow-hidden rounded-2xl">
+      <div
+        id="carousel"
+        class="flex transition-transform duration-500 ease-in-out"
+      >
+      </div>
+    </div>
+    <div class="w-full h-fit flex items-center gap-4 justify-center">
+      <button
+        id="prev"
+        class="px-5 py-2.5 bg-purple-600 cursor-pointer rounded-xl"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-left-dashed"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 12h6m3 0h1.5m3 0h.5" />
+          <path d="M5 12l4 4" />
+          <path d="M5 12l4 -4" />
+        </svg>
+      </button>
+      <button
+        id="next"
+        class="px-5 py-2.5 bg-purple-600 cursor-pointer rounded-xl"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right-dashed"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 12h.5m3 0h1.5m3 0h6" />
+          <path d="M15 16l4 -4" />
+          <path d="M15 8l4 4" />
+        </svg>
+      </button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
