@@ -1,18 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Password Generator</title>
-</head>
-<body>
-    <div class="w-full min-h-screen selection:bg-neutral-700 bg-neutral-950 text-neutral-50 font-[Satoshi] flex items-center justify-center">
-        <div class="w-full h-12 flex items-center justify-center gap-3">
-            <div id="renderDiv" class="bg-neutral-100/4 rounded-lg border-2 border-neutral-200/4 w-sm h-full px-4 flex items-center">Generate your Password</div>
-            <button id="generateButton" class="h-full w-fit px-8 bg-purple-600 rounded-lg">Generate</button>
+  </head>
+  <body>
+    <div
+      class="w-full min-h-screen flex-col p-16 max-sm:p-8 selection:bg-neutral-700 bg-neutral-950 text-neutral-50 font-[Satoshi] flex items-center justify-center"
+    >
+      <div class="w-full h-12 flex items-center justify-center gap-3">
+        <div
+          class="bg-neutral-100/4 rounded-lg border-2 border-neutral-200/4 w-sm h-full px-4 flex items-center justify-between"
+        >
+          <span id="password">Generate Password</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            id="copyBtn"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-copy cursor-pointer text-neutral-400 hover:text-neutral-200 transition-colors duration-300 ease-in-out"
+            title="copy"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666"
+            />
+            <path
+              d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
+            />
+          </svg>
         </div>
+        <button
+          id="generateButton"
+          class="h-full w-fit px-8 bg-purple-600 hover:bg-purple-700 rounded-lg transition-all duration-300 ease-in-out cursor-pointer active:scale-95 flex items-center justify-center"
+        >
+          Generate
+        </button>
+      </div>
+      <div class="w-full h-12 flex flex-wrap items-center justify-center gap-8 mt-6">
+        <div class="gap-3 flex items-center justify-center">
+          <input type="checkbox" name="lowercases" id="lowercases" />
+          <label for="lowercases">Lowercases</label>
+        </div>
+        <div class="gap-3 flex items-center justify-center">
+          <input type="checkbox" name="uppercases" id="uppercases" />
+          <label for="uppercases">Uppercases</label>
+        </div>
+        <div class="gap-3 flex items-center justify-center">
+          <input type="checkbox" name="numbers" id="numbers" />
+          <label for="numbers">Numbers</label>
+        </div>
+        <div class="gap-3 flex items-center justify-center">
+          <input type="checkbox" name="symbols" id="symbols" />
+          <label for="symbols">Symbols</label>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
