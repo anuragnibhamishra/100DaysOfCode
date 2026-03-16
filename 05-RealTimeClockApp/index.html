@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Time Clock</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div
+      id="main"
+      class="w-full h-screen selection:bg-[#D6FFB7] selection:text-neutral-950 bg-neutral-950 font-[Satoshi] flex justify-center items-center text-neutral-100"
+    >
+      <div id="DateTime" class="flex w-full justify-center h-fit">
+        <div
+          id="date"
+          class="w-fit mr-6 text-7xl max-md:text-4xl max-sm:text-2xl font-bold h-20 flex justify-center items-center"
+        ></div>
+        <div
+          id="time"
+          class="w-fit h-20 text-7xl max-md:text-4xl max-sm:text-2xl font-bold flex justify-center items-center"
+        ></div>
+      </div>
+      <div class="w-full absolute top-3/5 gap-6 h-10 flex justify-center items-center">
+        <span class="text-lg font-medium text-neutral-500">12 Hour Format</span>
+        <div
+          id="formatToggle"
+          class="relative w-20 h-full bg-neutral-800 rounded-full shadow-inner cursor-pointer ease-in-out duration-1000 flex items-center p-2 transition-all"
+        >
+          <div
+            id="thumb"
+            class="absolute right-2 w-7 h-7 bg-purple-600 rounded-full flex items-center justify-center transition-all ease-out duration-1000"
+          >
+          </div>
+        </div>
+        <span class="text-lg font-medium text-neutral-500">24 Hour Format</span>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
