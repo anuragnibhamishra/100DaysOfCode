@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter App</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div
+      class="w-full h-screen bg-neutral-950 text-neutral-100 flex items-center font-[Satoshi]"
+    >
+      <div class="w-full h-fit p-4 flex justify-center items-center gap-3">
+        <button id="minus" class="p-3 bg-purple-600 cursor-pointer rounded-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-minus"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+          </svg>
+        </button>
+        <button
+          id="reset"
+          class="p-3 cursor-pointer bg-neutral-900 rounded-lg active:border-2 active:border-purple-600"
+        ></button>
+        <button id="plus" class="p-3 bg-purple-600 rounded-lg cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-plus"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
