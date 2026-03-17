@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>The Year Calendar</title>
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="w-full min-h-screen flex flex-col items-center justify-center bg-neutral-950 p-10 max-sm:p-4 max-md:p-8 max-lg:p-10 text-neutral-100 font-medium font-[Satoshi]">
+      <h1 class="text-5xl max-sm:text-3xl">The Year Calendar</h1>
+      <div id="YearBoxes"></div>
+      <div
+        id="modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-transparent transition-opacity duration-300"
+      >
+      </div>
+    <script src="script.js"></script>
+  </body>
+</html>

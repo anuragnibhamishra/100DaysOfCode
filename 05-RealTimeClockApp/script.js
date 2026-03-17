@@ -44,11 +44,13 @@ function toggleFormat() {
 
     // Update thumb position based on format
     if (is24Hour) {
-        thumb.classList.remove("left-2", "bg-neutral-700");
-        thumb.classList.add("right-2", "bg-purple-600");
+        thumb.classList.remove("left-1", "bg-neutral-700");
+        thumb.classList.add("right-1", "bg-purple-600");
+        thumb.textContent = 1;
     } else {
-        thumb.classList.remove("right-2", "bg-purple-600");
-        thumb.classList.add("left-2", "bg-neutral-700");
+        thumb.classList.remove("right-1", "bg-purple-600");
+        thumb.classList.add("left-1", "bg-neutral-700");
+        thumb.textContent = 0;
     }
 
     updateClock();
