@@ -72,12 +72,14 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 
 function setRootStyle() {
-    root.className = "relative max-w-96 max-h-[492px] font-[Satoshi] text-neutral-100 flex items-center justify-start";
+    root.className = "relative max-w-96 rounded-4xl max-h-[492px] font-[Satoshi] transition-transform duration-300 ease-in-out text-neutral-100 flex items-center justify-start";
 }
 
 function createUser(user) {
+    root.classList.add("snap-x");
     const card = document.createElement("div");
     card.className = "bg-neutral-900 w-96 min-w-[24rem] h-[492px] p-3 rounded-4xl relative shrink-0 shadow-lg shadow-black/40";
+    card.classList.add("snap-center")
 
     const topBar = document.createElement("div");
     topBar.className = "w-full text-neutral-950 h-fit flex justify-end absolute px-5 top-5 left-0";
@@ -109,8 +111,6 @@ function createUser(user) {
 
     const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path2.setAttribute("d", "M5 12l5 5l10 -10");
-
-    checkIcon.append(path1, path2);
 
     const plusIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     plusIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -145,27 +145,22 @@ function createUser(user) {
     followingImg.className = "w-full h-full rounded-full object-cover";
     followingCardInner.appendChild(followingImg);
     followingCard.appendChild(followingCardInner);
-
+    const followingList = document.getElementById("followingList");
 
     button.addEventListener("click", () => {
-        let isFollowing = button.classList.contains("text-green-600");
-        button.classList.toggle("text-green-600");
-        if (button.classList.contains("text-green-600")) {
-            spanFollow.textContent = "Following";
-            plusIcon.style.display = "none";
-            checkIcon.style.display = "block";
-        } else {
-            spanFollow.textContent = "Follow";
-            plusIcon.style.display = "block";
-            checkIcon.style.display = "none";
-        }
-        if (isFollowing) {
-            document.getElementById("followingList").removeChild(followingCard)
+        const isFollowing = button.classList.toggle("text-green-600");
 
+        spanFollow.textContent = isFollowing ? "Following" : "Follow";
+        plusIcon.style.display = isFollowing ? "none" : "block";
+        checkIcon.style.display = isFollowing ? "block" : "none";
+
+        if (isFollowing) {
+            followingList.appendChild(followingCard);
         } else {
-            document.getElementById("followingList").appendChild(followingCard)
+            followingList.removeChild(followingCard);
         }
     });
+
     const banner = document.createElement("div");
     banner.className = "w-full h-38 bg-neutral-800 rounded-3xl overflow-hidden";
 
@@ -287,11 +282,15 @@ function initialize() {
 
     users.forEach(createUser);
 }
+let isAnimating = false;
 
 function slider(index) {
+    if (isAnimating) return;
+    isAnimating = true;
 
-    root.style.transform = `translateX(-${index * 100}%)`;
+    root.style.transform = `translateX(-${index * 384}px)`;
 
+    setTimeout(() => isAnimating = false, 300);
 }
 
 let currentIndex = 0;
@@ -304,6 +303,11 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % users.length;
     slider(currentIndex);
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextBtn.click();
+    if (e.key === "ArrowLeft") prevBtn.click();
 });
 
 initialize();
