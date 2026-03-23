@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="shortcut icon" href="../logo.svg" type="image/x-icon" />
+    <title>Theme Switch</title>
+    <style>
+      * {
+        transition:
+          background-color 0.35s ease,
+          color 0.35s ease,
+          border-color 0.35s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="w-full selection:bg-(--text) transition-colors duration-300 ease-in-out selection:text-(--bg) h-screen bg-(--bg) text-(--text) font-[Satoshi]"
+    >
+      <div
+        id="navbar"
+        class="w-full absolute z-50 flex h-16 px-16 justify-between items-center"
+      >
+        <span class="h-full w-fit text-3xl items-center flex justify-center"
+          >MinimalUI</span
+        >
+        <ul
+          class="flex h-full justify-between max-md:hidden text-lg items-center gap-8"
+        >
+          <li>Icons</li>
+          <li>Avatars</li>
+          <li>Components</li>
+        </ul>
+        <button
+          id="themeButton"
+          class="px-4 py-2 cursor-pointer rounded-xl bg-(--buttonbg) flex gap-3 justify-center items-center border-2 border-(--border)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-color-swatch"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M19 3h-4a2 2 0 0 0 -2 2v12a4 4 0 0 0 8 0v-12a2 2 0 0 0 -2 -2"
+            />
+            <path
+              d="M13 7.35l-2 -2a2 2 0 0 0 -2.828 0l-2.828 2.828a2 2 0 0 0 0 2.828l9 9"
+            />
+            <path d="M7.3 13h-2.3a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h12" />
+            <path d="M17 17l0 .01" />
+          </svg>
+          <span id="themeName" class="font-medium capitalize"></span>
+        </button>
+      </div>
+      <div
+        id="hero"
+        class="w-full flex-col h-full flex justify-center items-center"
+      >
+        <span
+          class="px-8 py-1.5 mb-6 rounded-full border-2 border-(--border) bg-(--buttonbg)"
+          >Get 50% off on your first order
+        </span>
+        <h1 class="text-6xl font-bold text-center mb-6">
+          The Foundation for your Design System
+        </h1>
+        <h2 class="text-2xl font-light text-center max-w-4xl mb-12">
+          A set of beautifully designed components that you can customize,
+          extend, and build on. Start here then make it your own. Open Source.
+          Open Code.
+        </h2>
+        <div class="w-full gap-4 font-medium flex justify-center items-center">
+          <button
+            class="px-4 py-2 bg-(--text) rounded-lg text-(--bg) cursor-pointer"
+          >
+            Get Started
+          </button>
+          <button
+            class="px-4 py-2 rounded-lg text-(--text) hover:bg-(--buttonbg) cursor-pointer"
+          >
+            View Components
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
