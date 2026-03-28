@@ -4,11 +4,6 @@ console.dir(board)
 let rows = Math.floor(board.clientHeight / 40)
 let columns = Math.floor(board.clientWidth / 40)
 
-// for (let i = 1; i <= rows * columns; i++) {
-//     let block = document.createElement("div")
-//     block.className = "w-[40px] h-[40px] bg-rose-400 border border-neutral-200 "
-//     board.appendChild(block);
-// }
 let direction = "up";
 let interval = null;
 let blocks = [];
@@ -18,6 +13,14 @@ let snake = [{
     x: 3, y: 7
 }, {
     x: 3, y: 8
+}, {
+    x: 3, y: 9
+}, {
+    x: 3, y: 10
+}, {
+    x: 3, y: 11
+}, {
+    x: 3, y: 12
 },]
 
 for (let row = 0; row < rows; row++) {
@@ -29,13 +32,30 @@ for (let row = 0; row < rows; row++) {
     }
 }
 
-function renderSnake() {
+function clearSnake() {
     snake.forEach(segment => {
-        (blocks[`${segment.x}-${segment.y}`]).className = "block bg-red-500 rounded-lg"
+        const square = blocks[`${segment.x}-${segment.y}`]
+        if (square) square.className = "block"
     })
 }
+
+function renderSnake() {
+    snake.forEach(segment => {
+        const square = blocks[`${segment.x}-${segment.y}`]
+        if (square) square.className = "block bg-red-500 rounded-lg"
+    })
+}
+
+function isGameOver(head) {
+    const hitWall = head.x < 0 || head.x >= rows || head.y < 0 || head.y >= columns
+    const hitSelf = snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y)
+    return hitWall || hitSelf
+}
+
+renderSnake()
+
 interval = setInterval(() => {
-    let head = null;
+    let head
     if (direction === "left") {
         head = { x: snake[0].x, y: snake[0].y - 1 }
     } else if (direction === "right") {
@@ -45,17 +65,18 @@ interval = setInterval(() => {
     } else if (direction === "up") {
         head = { x: snake[0].x - 1, y: snake[0].y }
     }
-    if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= columns) {
-    clearInterval(interval)
-    alert("Game Over")
-}
-    snake.forEach(segment => {
-        (blocks[`${segment.x}-${segment.y}`]).className = "block"
-    })
-    snake.unshift(head);
+
+    if (isGameOver(head)) {
+        clearInterval(interval)
+        alert("Game Over")
+        return
+    }
+
+    clearSnake()
+    snake.unshift(head)
     snake.pop()
     renderSnake()
-}, 200);
+}, 200)
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft" && direction !== "right") {
