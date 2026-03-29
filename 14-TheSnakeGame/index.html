@@ -1,32 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Snake Game</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        #board {
-            display: grid;
-            grid-template-rows: repeat(auto-fill, minmax(40px, 1fr));
-            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-        }
-        .block{
-            width: 40px;
-            height: 40px;
-        }
+      #board {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, minmax(40px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      }
+      .block {
+        width: 40px;
+        height: 40px;
+      }
     </style>
-</head>
-<body class="w-full h-screen bg-neutral-950 text-neutral-100 font-[Satoshi] flex items-center p-16 justify-center">
-    <div class="w-full h-full px-10 flex flex-col gap-2">
-        <div class="w-full h-16 flex items-center justify-between">
-            <div class="px-6 py-2.5 text-purple-600 bg-neutral-800 border-2 border-neutral-700 rounded-xl">Highscore : 0</div>
-            <div class="px-6 py-2.5 text-purple-600 bg-neutral-800 border-2 border-neutral-700 rounded-xl">Score : 0</div>
-            <div class="px-6 py-2.5 text-purple-600 bg-neutral-800 border-2 border-neutral-700 rounded-xl">Time : 00:00</div>
-        </div>
-        <div id="board" class="w-full grow border-2 border-neutral-700">
+  </head>
+  <body
+    class="w-full h-screen bg-neutral-950 text-neutral-100 font-[Satoshi] flex items-center p-16 justify-center"
+  >
+  <div class="modalOverlay w-full h-full absolute top-0 left-0 flex items-center justify-center bg-neutral-100/1 backdrop-blur-xs">
+    <div class="w-5/10 h-1/2 bg-neutral-900 modal flex flex-col items-center justify-center rounded-2xl">
+        <h1>Welcome to The Snake Game</h1>
+        <div class="w-full h-fit gap-2 flex items-center justify-center">
+            <button class="px-5 py-2 mt-4 startBtn bg-purple-600 rounded-lg">Start Game</button>
+            <button class="px-5 py-2 mt-4 resumeBtn bg-purple-600 rounded-lg hidden">Resume Game</button>
+            <button class="px-5 py-2 mt-4 restartBtn bg-purple-600 rounded-lg hidden">Restart Game</button>
         </div>
     </div>
+  </div>
+    <div class="w-full h-full px-10 flex flex-col gap-2">
+      <div class="w-full h-16 flex items-center justify-between">
+        <div
+          class="highScore px-6 py-2.5 text-neutral-200 bg-neutral-800 border-2 border-purple-700 rounded-xl"
+        >
+          Highscore : 0
+        </div>
+        <div
+          class="score px-6 py-2.5 text-neutral-200 bg-neutral-800 border-2 border-purple-700 rounded-xl"
+        >
+          Score : 0
+        </div>
+        <div
+          class="timerDisplay px-6 py-2.5 text-neutral-200 bg-neutral-800 border-2 border-purple-700 rounded-xl"
+        >
+          Time : 00:00
+        </div>
+      </div>
+      <div id="board" class="w-full grow border-2 border-neutral-700"></div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
