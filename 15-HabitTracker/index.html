@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker</title>
+    <style>
+      ::-webkit-scrollbar{
+        display: none;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-neutral-950 text-neutral-50 px-6 pb-6 min-h-screen flex flex-col w-full font-[Satoshi]"
+  >
+    <div id="modalOverlay"
+      class="w-full h-full inset-0 p-6 absolute hidden items-center justify-center bg-neutral-100/1 backdrop-blur-xs"
+    >
+      <div class="w-lg h-fit bg-neutral-800 rounded-2xl p-4">
+        <form class="w-full h-full flex flex-col justify-between gap-2">
+          <div class="w-full pl-1">Habit Name</div>
+          <input
+            type="text"
+            id="habitName"
+            class="px-5 py-3 border-2 border-neutral-700 rounded-lg focus:outline-none focus:border-purple-600 w-full text-sm"
+            required
+            placeholder="Code Daily"
+          />
+          <div class="w-full pl-1">Habit Description</div>
+          <input
+            type="text"
+            id="habitDesc"
+            class="px-5 py-3 border-2 border-neutral-700 rounded-lg focus:outline-none focus:border-purple-600 w-full text-sm"
+            required
+            placeholder="I create one project daily & push it on Github"
+          />
+          <div class="w-full h-fit mt-6 flex gap-4">
+            <button id="clearBtn" class="py-3 w-1/2 rounded-lg bg-red-600">
+              Close
+            </button>
+            <button type="submit" class="py-3 w-1/2 bg-purple-600 rounded-lg">
+              Commit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="w-full h-fit p-4 flex items-center justify-between">
+      <h1 class=" text-2xl">Habit Tracker</h1>
+      <button id="newHabitBtn" class="px-5 py-2 bg-purple-600 cursor-pointer rounded-lg">
+        Add a New Habit
+      </button>
+    </div>
+    <div id="habitWrapper"
+      class="w-full h-full grow bg-neutral-100/4 flex flex-col gap-4 p-4 rounded-2xl border-2 border-neutral-200/6"
+    ></div>
+    <script src="script.js"></script>
+  </body>
+</html>
