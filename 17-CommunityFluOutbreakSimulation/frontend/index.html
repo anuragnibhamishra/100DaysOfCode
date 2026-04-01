@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flu Outbreak Simulator</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 p-6 font-[Satoshi]">
+    <div class="max-w-4xl mx-auto bg-neutral-900 p-6 rounded-xl">
+      <h1 class="text-2xl mb-4">Community Flu Simulation</h1>
+
+      <div class="grid grid-cols-2 gap-4">
+        <input
+          id="population"
+          placeholder="Population"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+        <input
+          id="initial_infected"
+          placeholder="Initial Infected"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+
+        <input
+          id="beta"
+          placeholder="Infection Rate (β)"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+        <input
+          id="gamma"
+          placeholder="Recovery Rate (γ)"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+
+        <input
+          id="vaccination_rate"
+          placeholder="Vaccination Rate"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+        <input
+          id="days"
+          placeholder="Days"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+
+        <input
+          id="closure_day"
+          placeholder="Closure Day (optional)"
+          autocomplete="off"
+          class="py-2 px-4 focus:outline-none focus:border-purple-600 border-2 border-neutral-700 rounded-lg"
+        />
+
+        <button
+          onclick="runSimulation()"
+          class="bg-purple-600 hover:bg-purple-700 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-purple-400 px-4 py-2 rounded-lg"
+        >
+          Run Simulation
+        </button>
+      </div>
+      <canvas id="chart" class="mt-6"></canvas>
+      <div id="insights" class="mt-4 text-lg font-medium"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
