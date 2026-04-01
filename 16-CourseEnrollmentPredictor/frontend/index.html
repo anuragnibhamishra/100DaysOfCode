@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Student Growth MMCA</title>
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-neutral-950 flex flex-col items-center justify-center min-h-screen gap-3 px-16 text-neutral-100 font-[Satoshi]"
+  >
+    <div class="bg-neutral-900 p-6 rounded-2xl h-fit w-lg">
+      <h2 class="text-2xl text-center mb-6">Enrollment Predictor</h2>
+
+      <form id="form" class="space-y-3">
+        <input
+          type="number"
+          id="initial"
+          placeholder="Initial Students"
+          class="w-full py-2 px-4 border-2 border-neutral-800 rounded-lg focus:outline-none focus:border-purple-600"
+          required
+        />
+        <input
+          type="number"
+          id="rate"
+          step="0.1"
+          placeholder="Growth Rate(e.g. 0.3)"
+          class="w-full py-2 px-4 border-2 border-neutral-800 rounded-lg focus:outline-none focus:border-purple-600"
+          required
+        />
+        <input
+          type="number"
+          id="capacity"
+          placeholder="Maximum Capacity"
+          class="w-full py-2 px-4 border-2 border-neutral-800 rounded-lg focus:outline-none focus:border-purple-600"
+          required
+        />
+        <input
+          type="number"
+          id="days"
+          placeholder="No. of Days"
+          class="w-full py-2 px-4  border-2 border-neutral-800 rounded-lg focus:outline-none focus:border-purple-600"
+          required
+        />
+
+        <button id="btn"
+          class="w-full bg-purple-600 text-neutral-100 p-2 mt-3 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-lg hover:bg-purple-700"
+        >
+          Predict
+        </button>
+      </form>
+    </div>
+    <div id="resultDisplay" class="h-fit hidden flex-col w-lg">
+      <div id="result" class="text-center"></div>
+      <canvas id="chart" class="w-full"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
