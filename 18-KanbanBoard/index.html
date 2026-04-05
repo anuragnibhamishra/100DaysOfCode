@@ -6,6 +6,36 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Kanban Board</title>
     <style>
+      @keyframes toast-in {
+        from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes toast-out {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-10px) scale(0.98);
+        }
+      }
+
+      #toastParent > .toast {
+        animation:
+          toast-in 250ms ease forwards,
+          toast-out 250ms ease var(--toast-stay, 2.75s) forwards;
+      }
+      button {
+        cursor: pointer;
+      }
       .hoverover {
         transition: all 0.2s ease-in-out;
         border-style: dashed;
@@ -16,10 +46,10 @@
 
   <body class="bg-neutral-950 text-neutral-100">
     <div class="w-full h-screen flex flex-col p-4 font-[Satoshi]">
-
+      <div id="toastParent"></div>
       <!-- Header -->
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-3">
+      <div class="flex items-center justify-between mb-4 px-1">
+        <div class="flex items-center gap-4">
           <img src="../logo.svg" alt="" width="28" />
           <h1 class="text-xl md:text-2xl tracking-tight">Kanban Board</h1>
         </div>
@@ -30,7 +60,6 @@
 
       <!-- Board -->
       <div class="flex flex-1 gap-4 flex-col md:flex-row overflow-hidden">
-
         <!-- Column -->
         <div
           id="todo"
@@ -46,45 +75,71 @@
           id="completed"
           class="flex flex-col gap-4 w-full md:w-1/3 bg-neutral-100/4 border-2 border-neutral-200/4 rounded-xl p-4 overflow-hidden"
         ></div>
-
       </div>
 
       <!-- Modal -->
       <div
-        class="modalOverlay hidden absolute inset-0  items-center justify-center bg-neutral-900/30 backdrop-blur-md"
+        class="modalOverlay hidden absolute inset-0 items-center justify-center bg-neutral-900/30 backdrop-blur-md"
       >
-        <div class="w-full max-w-sm p-4 bg-neutral-100/4 border-2 border-neutral-200/4 rounded-xl">
+        <div
+          class="w-full max-w-sm p-4 bg-neutral-100/4 border-2 border-neutral-200/4 rounded-xl"
+        >
           <form class="flex flex-col gap-3">
-            
-            <label>Task Name</label>
+            <label class="flex items-center justify-between">
+              Task Name
+              <span id="closeBtn" class="text-red-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-x-icon lucide-x"
+                >
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </span>
+            </label>
             <input
               id="title"
               type="text"
+              required
               placeholder="Learn Closures"
               class="px-4 py-2 rounded-lg bg-neutral-100/4 border-2 border-neutral-200/4 focus:outline-none focus:border-neutral-500"
             />
-
             <label>Task Description</label>
             <input
               id="desc"
               type="text"
+              required
               placeholder="Learn how closures work"
               class="px-4 py-2 rounded-lg bg-neutral-100/4 border-2 border-neutral-200/4 focus:outline-none focus:border-neutral-500"
             />
-
             <button
               type="submit"
               class="mt-2 px-4 py-2 bg-purple-600 rounded-lg border-2 focus:outline-none border-purple-600 focus:border-purple-400"
             >
               Commit
             </button>
-
           </form>
         </div>
       </div>
-
+      <!-- confirmation modal -->
+      <div class="confirmModal absolute w-full h-full inset-0 hidden items-center justify-center">
+        <div class="w-fit max-w-sm p-4 bg-neutral-100/4 border-2 flex flex-col backdrop-blur-lg border-neutral-200/4 rounded-xl">
+          <h1 class="text-center px-1 mb-4">Are you sure you want to delete this task?</h1>
+          <div class="w-full h-fit flex items-center justify-between gap-4">
+            <button id="cancelConfirm" class="px-6 py-2 w-1/2 rounded-lg border-2 border-red-400/70 text-red-400">cancel</button>
+            <button id="confirmBtn" class="px-6 py-2 w-1/2 rounded-lg bg-red-600">delete</button>
+          </div>
+        </div>
+      </div>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
