@@ -6,21 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit Tracker</title>
     <style>
-      ::-webkit-scrollbar{
+      ::-webkit-scrollbar {
         display: none;
+      }
+      button {
+        cursor: pointer;
       }
     </style>
   </head>
   <body
     class="bg-neutral-950 text-neutral-50 px-6 pb-6 min-h-screen flex flex-col w-full font-[Satoshi]"
   >
-    <div id="modalOverlay"
+    <div
+      id="modalOverlay"
       class="w-full h-full inset-0 p-6 absolute hidden items-center justify-center bg-neutral-100/1 backdrop-blur-xs"
     >
       <div class="w-lg h-fit bg-neutral-800 rounded-2xl p-4">
         <form class="w-full h-full flex flex-col justify-between gap-2">
           <div class="w-full pl-1">Habit Name</div>
           <input
+            autocomplete="off"
             type="text"
             id="habitName"
             class="px-5 py-3 border-2 border-neutral-700 rounded-lg focus:outline-none focus:border-purple-600 w-full text-sm"
@@ -29,6 +34,7 @@
           />
           <div class="w-full pl-1">Habit Description</div>
           <input
+            autocomplete="off"
             type="text"
             id="habitDesc"
             class="px-5 py-3 border-2 border-neutral-700 rounded-lg focus:outline-none focus:border-purple-600 w-full text-sm"
@@ -47,14 +53,85 @@
       </div>
     </div>
     <div class="w-full h-fit p-4 flex items-center justify-between">
-      <h1 class=" text-2xl">Habit Tracker</h1>
-      <button id="newHabitBtn" class="px-5 py-2 bg-purple-600 cursor-pointer rounded-lg">
+      <h1 class="text-2xl">Habit Tracker</h1>
+      <button
+        id="newHabitBtn"
+        class="px-5 py-2 bg-purple-600 cursor-pointer rounded-lg"
+      >
         Add a New Habit
       </button>
     </div>
-    <div id="habitWrapper"
+    <div
+      id="dateScroller"
+      class="w-full h-24 my-2 flex items-center overflow-x-auto gap-4 whitespace-nowrap"
+    >
+      <!-- min-w required -->
+      <div id="datesContainer" class="flex h-fit gap-3 px-1"></div>
+    </div>
+    <div
+      id="habitWrapper"
       class="w-full h-full grow bg-neutral-100/4 flex flex-col gap-4 p-4 rounded-2xl border-2 border-neutral-200/6"
-    ></div>
+    >
+      <div
+        class="relative w-full h-fit items-center flex bg-neutral-100/4 p-4 rounded-2xl border-2 border-neutral-200/6"
+      >
+        <div
+          class="w-12 h-12 mr-4 bg-green-600 rounded-2xl inline-flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="icon icon-tabler icons-tabler-filled icon-tabler-apple"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M15 2a1 1 0 0 1 .117 1.993l-.117 .007c-.693 0 -1.33 .694 -1.691 1.552a5.1 5.1 0 0 1 1.982 -.544l.265 -.008c2.982 0 5.444 3.053 5.444 6.32c0 3.547 -.606 5.862 -2.423 8.578c-1.692 2.251 -4.092 2.753 -6.41 1.234a.31 .31 0 0 0 -.317 -.01c-2.335 1.528 -4.735 1.027 -6.46 -1.27c-1.783 -2.668 -2.39 -4.984 -2.39 -8.532l.004 -.222c.108 -3.181 2.526 -6.098 5.44 -6.098c.94 0 1.852 .291 2.688 .792c.419 -1.95 1.818 -3.792 3.868 -3.792m-7.034 6.154c-1.36 .858 -1.966 2.06 -1.966 3.846a1 1 0 0 0 2 0c0 -1.125 .28 -1.678 1.034 -2.154a1 1 0 1 0 -1.068 -1.692"
+            />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl">Habit Name</h1>
+          <p class="text-neutral-400">Habit Description</p>
+        </div>
+        <div class="ml-auto px-6 py-2 rounded-xl bg-green-600">Success</div>
+        <div class="ml-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-dots-vertical"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M11 19a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M11 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+          </svg>
+        </div>
+        <div
+          class="w-fit p-4 bg-neutral-100/4 border-2 backdrop-blur-md border-neutral-200/4 h-fit flex flex-col absolute rounded-3xl gap-2 right-6 bottom-12"
+        >
+          <button
+            class="px-6 py-2 border-2 border-blue-700 rounded-xl flex items-center justify-center"
+          >
+            Edit
+          </button>
+          <button
+            class="px-6 py-2 bg-red-600 rounded-xl flex items-center justify-center"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
