@@ -59,6 +59,37 @@ function saveHabits() {
 }
 
 let currentMoreModal = null;
+let currentEditingHabitIndex = null;
+const editModalOverlay = document.querySelector("#editModalOverlay")
+const editForm = document.querySelector("#editForm")
+
+function openEditModal(habitIndex) {
+    currentEditingHabitIndex = habitIndex
+    const habit = habits[habitIndex]
+    document.querySelector("#editHabitName").value = habit.habitName
+    document.querySelector("#editHabitDesc").value = habit.habitDesc
+    editModalOverlay.style.display = "flex"
+}
+
+editForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const editHabitName = document.querySelector("#editHabitName").value
+    const editHabitDesc = document.querySelector("#editHabitDesc").value
+    
+    if (currentEditingHabitIndex !== null) {
+        habits[currentEditingHabitIndex].habitName = editHabitName
+        habits[currentEditingHabitIndex].habitDesc = editHabitDesc
+        saveHabits()
+        editModalOverlay.style.display = "none"
+        renderHabit()
+    }
+})
+
+document.querySelector("#closeEditBtn").addEventListener("click", () => {
+    editForm.reset()
+    editModalOverlay.style.display = "none"
+    currentEditingHabitIndex = null
+})
 
 function showAnalytics(habit) {
     const overview = document.querySelector("#overview")
@@ -79,7 +110,7 @@ function showAnalytics(habit) {
     overview.appendChild(infoDiv)
     
     const today = new Date()
-    for (let i = 30; i >= -365; i--) {
+    for (let i = 59; i >= 0; i--) {
         const date = new Date(today)
         date.setDate(date.getDate() - i)
         const dateKey = getDateKey(date)
@@ -87,7 +118,7 @@ function showAnalytics(habit) {
         const state = states[stateIndex]
         
         const dayDiv = document.createElement("div")
-        dayDiv.className = `w-3 h-3 rounded-sm bg-${state.color}-600`
+        dayDiv.className = `w-6 h-6 rounded-sm bg-${state.color}-600`
         dayDiv.title = `${date.toDateString()}: ${state.state}`
         historyHeatmap.appendChild(dayDiv)
     }
@@ -98,6 +129,17 @@ function showAnalytics(habit) {
 
 function renderHabit() {
     const habitWrapper = document.querySelector("#habitWrapper")
+    if (habits.length === 0) {
+    const habitWrapper = document.querySelector("#habitWrapper")
+    habitWrapper.innerHTML = ""
+
+    const empty = document.createElement("div")
+    empty.className = "w-full flex grow items-center justify-center text-neutral-500"
+    empty.textContent = "No habits yet. Start building your system."
+
+    habitWrapper.appendChild(empty)
+    return
+}
     habitWrapper.innerHTML = ""
     const total = states.length;
     const dateKey = getDateKey(selectedDate)
@@ -106,7 +148,7 @@ function renderHabit() {
         let habitDiv = document.createElement("div")
         habitDiv.className = "w-full relative h-fit flex items-center bg-neutral-100/4 p-4 rounded-2xl border-2 border-neutral-200/6"
         let category = document.createElement("button")
-        category.className = "w-12 h-12 mr-4 bg-green-600 rounded-2xl flex shrink-0 items-center justify-center"
+        category.className = "w-12 h-12 mr-4 bg-purple-600 rounded-2xl flex shrink-0 items-center justify-center"
         category.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-apple pointer-events-none"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 2a1 1 0 0 1 .117 1.993l-.117 .007c-.693 0 -1.33 .694 -1.691 1.552a5.1 5.1 0 0 1 1.982 -.544l.265 -.008c2.982 0 5.444 3.053 5.444 6.32c0 3.547 -.606 5.862 -2.423 8.578c-1.692 2.251 -4.092 2.753 -6.41 1.234a.31 .31 0 0 0 -.317 -.01c-2.335 1.528 -4.735 1.027 -6.46 -1.27c-1.783 -2.668 -2.39 -4.984 -2.39 -8.532l.004 -.222c.108 -3.181 2.526 -6.098 5.44 -6.098c.94 0 1.852 .291 2.688 .792c.419 -1.95 1.818 -3.792 3.868 -3.792m-7.034 6.154c-1.36 .858 -1.966 2.06 -1.966 3.846a1 1 0 0 0 2 0c0 -1.125 .28 -1.678 1.034 -2.154a1 1 0 1 0 -1.068 -1.692" /></svg>`
         let infoDiv = document.createElement("div")
         let h1 = document.createElement("h1")
@@ -136,6 +178,9 @@ function renderHabit() {
         let editBtn = document.createElement("button")
         editBtn.className = "px-6 py-2 bg-blue-700 rounded-xl flex items-center justify-center"
         editBtn.textContent = "Edit"
+        editBtn.addEventListener("click", () => {
+            openEditModal(i)
+        })
         let deleteBtn = document.createElement("button")
         deleteBtn.className = "px-6 py-2 bg-red-600 rounded-xl flex items-center justify-center"
         deleteBtn.textContent = "Delete"

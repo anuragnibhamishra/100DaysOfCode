@@ -15,7 +15,7 @@
     </style>
   </head>
   <body
-    class="bg-neutral-950 text-neutral-50 px-6 pb-6 min-h-screen flex flex-col w-full font-[Satoshi]"
+    class="bg-neutral-950 selection:text-neutral-300 selection:bg-neutral-800 text-neutral-50 px-6 pb-6 min-h-screen flex flex-col w-full font-[Satoshi]"
   >
     <div
       id="modalOverlay"
@@ -56,6 +56,45 @@
         </form>
       </div>
     </div>
+    <div
+      id="editModalOverlay"
+      class="w-full h-full inset-0 p-6 z-50 absolute hidden items-center justify-center bg-neutral-100/1 backdrop-blur-xs"
+    >
+      <div class="w-lg h-fit bg-neutral-800 rounded-2xl p-4">
+        <form id="editForm" class="w-full h-full flex flex-col justify-between gap-2">
+          <div class="w-full pl-1">Habit Name</div>
+          <input
+            autocomplete="off"
+            type="text"
+            id="editHabitName"
+            class="px-5 py-3 border-2 border-neutral-700 rounded-lg focus:outline-none focus:border-purple-600 w-full text-sm"
+            required
+            placeholder="Code Daily"
+          />
+          <div class="w-full pl-1">Habit Description</div>
+          <input
+            autocomplete="off"
+            type="text"
+            id="editHabitDesc"
+            class="px-5 py-3 border-2 border-neutral-700 rounded-lg focus:outline-none focus:border-purple-600 w-full text-sm"
+            required
+            placeholder="I create one project daily & push it on Github"
+          />
+          <div class="w-full h-fit mt-6 flex gap-4">
+            <button
+              type="button"
+              id="closeEditBtn"
+              class="py-3 w-1/2 rounded-lg bg-red-600"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="py-3 w-1/2 bg-purple-600 rounded-lg">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="w-full h-fit p-4 flex items-center justify-between">
       <h1 class="text-2xl">Habit Tracker</h1>
       <button
@@ -91,8 +130,8 @@
 
         </div>
         <div class="w-full h-60 mt-4">
-          <h2 class="">History</h2>
-          <div id="historyHeatmap" class="w-full h-fit mt-4 flex flex-wrap gap-0.5">
+          <h2 class="text-lg">History ( Last 60 Days )</h2>
+          <div id="historyHeatmap" class="w-full h-fit mt-4 flex flex-wrap gap-1">
           </div>
         </div>
       </div>

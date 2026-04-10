@@ -92,6 +92,8 @@ function render() {
     const counts = { todo: 0, inProgress: 0, completed: 0 }
     tasks.forEach(t => counts[t.status]++)
 
+
+
     Object.entries(columns).forEach(([key, col]) => {
         col.innerHTML = `
         <div class="flex items-center justify-between">
@@ -116,7 +118,7 @@ function render() {
             <p class="text-neutral-400">${t.desc}</p>
             <div class="flex items-center justify-between">
                 <div class="text-sm text-neutral-500 mt-2">${new Date(+t.id).toLocaleString()}</div>
-                <button class="text-sm text-red-100 rounded-md mt-2 px-6 py-2 bg-red-600">Delete</button>
+                <button class="text-sm text-red-500 rounded-md mt-2 px-6 py-2 bg-neutral-800 hover:bg-red-600 hover:text-red-100 transition-colors duration-200">Delete</button>
             </div>
         `
         el.querySelector("button").addEventListener("click", () => {
@@ -144,6 +146,20 @@ function render() {
         el.addEventListener("dragstart", () => draggedItem = el)
         fragment[t.status].appendChild(el)
     })
+
+    Object.entries(columns).forEach(([key, col]) => {
+    if (counts[key] === 0) {
+        const empty = document.createElement("div")
+        empty.className = "w-full h-full flex items-center justify-center text-neutral-500"
+        empty.textContent =
+            key === "todo"
+                ? "Nothing here. Start by adding a task."
+                : key === "inProgress"
+                ? "Drag tasks here to start working."
+                : "Finish something. This space is waiting."
+        col.appendChild(empty)
+    }
+})
 
     Object.entries(fragment).forEach(([key, frag]) => {
         columns[key].appendChild(frag)
