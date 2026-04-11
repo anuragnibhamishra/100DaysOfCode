@@ -1,10 +1,10 @@
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 ::selection {
-    background: #0a0a0a;
-    color: #fafafa;
+  background: #0a0a0a;
+  color: #fafafa;
 }
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
