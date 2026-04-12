@@ -152,9 +152,17 @@
       class="w-full h-screen text-center max-[480px]:text-5xl max-sm:text-7xl max-md:text-9xl max-lg:text-[180px] bg-black flex flex-col items-center justify-center p-12 text-[280px] pointer-events-none font-['Bebas_Neue'] font-black text-neutral-100 uppercase leading-none">
       Just Do it
     </div>
-    <div id="featuredSection" class="w-full h-screen bg-amber-500">
-      <div class="max-w-360 bg-rose-600 mx-auto h-20 flex items-center justify-center">
-        <h2 class="text-xl font-[Poppins] font-semibold tracking-tight text-neutral-950">Featured Section</h2>
+    <div id="featuredSection" class="w-full h-screen bg-neutral-50 flex flex-col items-center">
+      <div class="max-w-360 mx-auto h-40 relative flex items-center justify-center">
+        <div id="overlay" class="w-full h-full z-40 absolute bg-neutral-50/1"></div>
+        <div class="w-full h-full relative flex items-center justify-center flex-col z-30">
+          <h2 class="text-5xl leading-none font-[Poppins] font-semibold tracking-tight text-neutral-950">featured</h2>
+          <span class="text-lg leading-none font-[Poppins] font-medium tracking-tight text-neutral-600">products</span>
+        </div>
+         <div class="w-full flex items-center uppercase justify-center font-[Bebas_Neue] tracking-[70px] ml-10 text-neutral-300 font-semibold text-9xl leading-none h-full absolute">sneaker</div>
+      </div>
+      <div class="w-full h-fit px-12 bg-amber-200 overflow-hidden">
+        <div id="featuredProducts"></div>
       </div>
     </div>
     <script src="./src/main.js"></script>
