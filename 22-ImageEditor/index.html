@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Image Editor</title>
+    <style>
+        input[type="range"] {
+            appearance: none;
+            width: 100%;
+            height: 2px;
+            background: #444;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 15px;
+            width: 15px;
+            background: #9810fa;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        input[type="range"] {
+            background: linear-gradient(to right, #9810fa 50%, #444 50%);
+        }
+        button {
+            cursor: pointer;
+        }
+        ::-webkit-scrollbar{
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track{
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb{
+            background: #444;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w-full min-h-screen sm:h-screen bg-neutral-950 text-neutral-50 font-[Satoshi] flex max-sm:flex-col">
+        <div class="w-2/3 h-full max-sm:w-full p-4 flex flex-col gap-4">
+            <div class="w-full p-4 flex-wrap flex items-center justify-center gap-4">
+                <label for="imageInput"
+                    class="px-6 leading-none py-2.5 tracking-tight rounded-lg bg-purple-600 cursor-pointer">
+                    Choose Image
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                </label>
+                <button id="resetBtn"
+                    class="px-6 leading-none py-2.5 tracking-tight rounded-lg bg-red-600">Reset</button>
+                <button id="downloadBtn"
+                    class="px-6 leading-none py-2.5 tracking-tight rounded-lg bg-green-600">Download</button>
+            </div>
+            <div
+                class="w-full flex sm:grow aspect-auto bg-neutral-100/4 border-2 rounded-2xl border-neutral-200/6 items-center justify-center overflow-hidden">
+                <div class="image-preview w-full p-4 h-full flex items-center justify-center">
+                    <div class="placeholder text-center text-neutral-400 px-6">
+                        <p class="text-xl">No Image Chosen</p>
+                        <p class="text-sm mt-2">Select a file to edit and download your image.</p>
+                    </div>
+                    <img id="mainImage" class="max-h-full max-w-full object-contain hidden" alt="Selected photo">
+                </div>
+            </div>
+        </div>
+        <div class="w-1/3 h-full max-sm:w-full max-sm:pl-4 p-4 pl-0 flex flex-col gap-4">
+            <div class="bg-neutral-100/4 grow border-2 border-neutral-200/6 rounded-2xl p-4 gap-4 flex flex-col">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl max-md:text-lg">Filters</h2>
+                    <div id="presetsContainer" class="relative">
+                        <button id="presetsToggle" class="px-6 leading-none inline-flex items-center justify-center hover:border-purple-600 transition-colors duration-200 select-none cursor-pointer py-2.5 rounded-lg bg-neutral-100/4 border-2 border-neutral-200/6">
+                            Presets
+                        </button>
+                        <div id="presetsPanel" class="hidden w-96 gap-4 h-fit flex-wrap backdrop-blur-sm p-4 bg-neutral-100/4 border-2 border-neutral-200/6 absolute right-0 top-14 rounded-lg z-50">
+                            <button data-preset="cinematic" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 leading-none rounded-lg">Cinematic</button>
+                            <button data-preset="vintage" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">Warm Vintage</button>
+                            <button data-preset="vibrant" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">Vibrant</button>
+                            <button data-preset="cool" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">Cool</button>
+                            <button data-preset="bw" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">B/W</button>
+                            <button data-preset="soft" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">Soft</button>
+                            <button data-preset="dramatic" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">Dramatic</button>
+                            <button data-preset="inverted" class="px-6 py-2.5 bg-neutral-100/4 border-2 border-neutral-100/6 rounded-lg leading-none">Inverted</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Brightness</p>
+                    <input type="range" min="0" max="200" value="100" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Contrast</p>
+                    <input type="range" min="0" max="200" value="100" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Hue Rotation</p>
+                    <input type="range" min="0" max="360" value="0" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Exposure</p>
+                    <input type="range" min="0" max="200" value="100" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Blur</p>
+                    <input type="range" min="0" max="20" value="0" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Saturation</p>
+                    <input type="range" min="0" max="200" value="100" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Grayscale</p>
+                    <input type="range" min="0" max="100" value="0" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Sepia</p>
+                    <input type="range" min="0" max="100" value="0" class="slider h-0.5 w-full">
+                </div>
+                <div class="filter flex flex-col gap-1">
+                    <p class="mb-2">Invert</p>
+                    <input type="range" min="0" max="100" value="0" class="slider h-0.5 w-full">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
