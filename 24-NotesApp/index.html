@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="shortcut icon" href="notesLogo.svg" type="image/x-icon">
+    <title>Notes App</title>
+</head>
+
+<body class="bg-neutral-900 text-neutral-100 min-h-screen p-8 font-[Satoshi]">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">Notes App</h1>
+        
+        <div class="mb-6 flex flex-col sm:flex-row gap-4">
+            <input id="noteInput" placeholder="Write a note..." class="flex-1 px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-lg text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-600" />
+            <button id="addBtn" class="px-6 py-2 bg-neutral-700 hover:bg-neutral-600 text-neutral-100 rounded-lg transition-colors">Add Note</button>
+        </div>
+
+        <div class="mb-6">
+            <input id="searchInput" placeholder="Search notes..." class="w-full px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-lg text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-600" />
+        </div>
+
+        <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
